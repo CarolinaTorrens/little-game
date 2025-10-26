@@ -12,10 +12,6 @@ canvas.style.background = "#000000ff";
 
 //INIT PAGE --------------------------------------------------------
 
-//ctx.strokeStyle = "white";
-//ctx.strokeRect(270,250,100,30);// EJE X, EJE Y, WIDTH, HEIGHT
-//ctx.textAlign("start")
-
 const buttonStart = {
     x: canvas.width / 2 - 75, //75 es la mitad del largo del button
     y: canvas.height / 2 - 25,
@@ -25,6 +21,9 @@ const buttonStart = {
     color: 'white',
     font: '24px Arial'
 };
+
+let gameState = 'startScreen';
+
 
 function drawButton(){
     //dibuja el rectangulo
@@ -55,7 +54,50 @@ function drawStartScreen() {
     drawButton();
 }
 
+canvas.addEventListener('click', (e)=>{
+    //obtiene la posicion del click en relacion con el canvas
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    console.log("posicion en pixeles dentro del canvas en eje x: ",mouseX);
+    console.log("posicion en pixeles dentro del canvas en eje y: ",mouseY);
+
+    console.log("coordenada x del boton: ",buttonStart.x);
+    console.log("coordenada y del boton: ",buttonStart.y);
+    
+
+
+
+    //solo revisa el click si estamos en la pantalla de inicio
+    if(gameState === 'startScreen'){
+
+        /// Verifica si el clic está DENTRO de las coordenadas del botón
+        const clickedButton = (
+            mouseX >= buttonStart.x && 
+            mouseX <= buttonStart.x + buttonStart.width &&
+            mouseY >= buttonStart.y && 
+            mouseY <= buttonStart.y + buttonStart.height
+
+            
+        );
+        if (clickedButton){
+            gameState = "playing";
+            game();
+            
+
+        }
+
+    }
+}
+);
+
 drawStartScreen();
+function game(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
+    //ctx.fillStyle = "white";
+    //ctx.fillRect(buttonStart.x, buttonStart.y, buttonStart.width, buttonStart.height);
+};
 
 
 
