@@ -19,7 +19,7 @@ const buttonStart = {
     height: 50,
     text: 'START',
     color: 'white',
-    font: '24px Arial'
+    font: '24px Michroma'
 };
 
 let gameState = 'startScreen';
@@ -50,7 +50,6 @@ function drawStartScreen() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpia el canvas
     // Opcional: Dibuja el título del juego aquí...
    
-    
     drawButton();
 }
 
@@ -66,9 +65,6 @@ canvas.addEventListener('click', (e)=>{
     console.log("coordenada x del boton: ",buttonStart.x);
     console.log("coordenada y del boton: ",buttonStart.y);
     
-
-
-
     //solo revisa el click si estamos en la pantalla de inicio
     if(gameState === 'startScreen'){
 
@@ -83,7 +79,7 @@ canvas.addEventListener('click', (e)=>{
         );
         if (clickedButton){
             gameState = "playing";
-            game();
+            game(); //llama a la funcion game para empezar el juego
             
 
         }
@@ -91,12 +87,55 @@ canvas.addEventListener('click', (e)=>{
     }
 }
 );
-
+//------------------------------------------------------
 drawStartScreen();
+
 function game(){
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
-    //ctx.fillStyle = "white";
-    //ctx.fillRect(buttonStart.x, buttonStart.y, buttonStart.width, buttonStart.height);
+    let life = 3;
+    if(life > 0){/*
+        while(life > 0){
+            level1(); //llama a la funcion del 1er nivel
+        }; */
+        ctx.fillText("You have 3 life go..", 250, 250);   
+    }else{
+        gameOver();
+    }
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(220, 300, 150, 15);
+};
+
+
+
+//----------------------------------------------------
+function gameOver(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //dibuja texto "GAME OVER"
+    ctx.fillStyle = 'white';
+    ctx.font = buttonStart.font;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle'; 
+
+    //dibuja el texto en el centro del rectangulo
+    ctx.fillText("GAMER OVER", 200, 300);    
+}
+
+
+//------------------------------------------------------
+function level1(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //dibuja texto "GAME OVER"
+    /*
+    ctx.fillStyle = 'white';
+    ctx.font = buttonStart.font;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle'; 
+
+    //dibuja el texto en el centro del rectangulo
+    ctx.fillText("YOU ARE IN THE LEVEL 1", 200, 300);  */
 };
 
 
@@ -117,38 +156,4 @@ function game(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-//Dibujar rectangulo blanco
-ctx.fillStyle = "white";
-ctx.fillRect(200,380,100,15);// EJE X, EJE Y, WIDTH, HEIGHT
-
-// Dibuja un rectángulo y una elipse (formas compuestas) de color rosa
-  ctx.fillStyle = "white";
-  ctx.ellipse(200, 125, 10, 10, Math.PI / 3, 0, 2 * Math.PI);
-  ctx.fill();
-
-//---------------
-    ctx.beginPath();
-    ctx.moveTo(75, 50);//EJE X , EJE Y
-    ctx.lineTo(100, 75); //EJE X , EJE Y
-    ctx.lineTo(100, 25);//EJE X , EJE Y
-    ctx.fill();
-
-    */
-
-
-   
-
-//alert("hello");
+/**/ 
